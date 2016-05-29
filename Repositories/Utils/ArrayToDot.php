@@ -1,5 +1,5 @@
 <?php
-namespace  Modules\LaravelResourceRepository\Repositories\Utils;
+namespace  Modules\Base\Repositories\Utils;
 
 class ArrayToDot
 {

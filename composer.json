@@ -1,5 +1,5 @@
 {
-    "name": "cuculab/repository",
+    "name": "cuculab/base",
     "type": "asgard-module",
     "require": {
         "php": ">=5.5.9",
@@ -9,7 +9,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-          "Modules\\Repository\\": "."
+          "Modules\\Base\\": "."
         }
     }
 }

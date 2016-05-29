@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelResourceRepository\Repositories;
+namespace Modules\Base\Repositories;
 
 interface BaseRepositoryInterface {
     public function getAll($request);

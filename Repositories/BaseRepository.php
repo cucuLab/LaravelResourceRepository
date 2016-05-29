@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelResourceRepository\Repositories;
+namespace Modules\Base\Repositories;
 
 use Intervention\Image\Facades\Image;
 use Modules\LaravelResourceRepository\Repositories\Utils\ArrayToDot;
