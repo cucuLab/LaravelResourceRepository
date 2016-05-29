@@ -1,5 +1,5 @@
 {
-    "name": "cuculab/laravelresourcerepository",
+    "name": "cuculab/laravel-resource-repository",
     "type": "asgard-module",
     "require": {
         "php": ">=5.5.9",
