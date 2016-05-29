@@ -1,10 +1,15 @@
 {
-    "name": "cuculab/laravel-resource-repository",
+    "name": "cuculab/repository",
     "type": "asgard-module",
     "require": {
         "php": ">=5.5.9",
         "composer/installers": "~1.0",
         "laravel/framework": "5.2.*",
         "intervention/image": "^2.3"
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "Modules\\Repository\\": "."
+        }
     }
 }
