@@ -107,12 +107,12 @@ class BaseRepository implements BaseRepositoryInterface{
         if(\Auth::check()){
             if(\Auth::user()->type !== "superuser")
             {
-
+/**
 //        if(\Schema::hasColumn($tableName, $key) &&
 //                    $this->storedObject->$key != $data[$key]){
 //                $this->storedObject->$key = $data[$key];
 //            }
-                $data = \vengine\Models\ResourceAccess::where("user_id", '=', \Auth::id())->get();
+                $data = \App\Models\ResourceAccess::where("user_id", '=', \Auth::id())->get();
                 $filterArray = [];
                 foreach ($data as $each) {
                         if($tableName == $each->resource_table){
@@ -167,6 +167,7 @@ class BaseRepository implements BaseRepositoryInterface{
                         $this->currentQuery->whereNotIn($key, $each['exclude']);
                     }
                 }
+                **/
             }
         }
 
