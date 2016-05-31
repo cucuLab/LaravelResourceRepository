@@ -558,11 +558,12 @@ class BaseRepository implements BaseRepositoryInterface{
             if (!$file->isValid()) return false;
             try {
                     $file->move($this->path.DIRECTORY_SEPARATOR.$option['destination'], $name);
-                    Image::make($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.$name
-                )->resize(480, 320, function($constraint){
-                    $constraint->aspectRatio();
-                })->save($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.'th_'.$name);
-
+                    if( $file->getClientOriginalExtension() != "mp4"){
+                            Image::make($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.$name
+                        )->resize(480, 320, function($constraint){
+                            $constraint->aspectRatio();
+                        })->save($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.'th_'.$name);
+                    }
                     $file = [ 'name' => $name, 'caption' => $option['caption'],
                         'file' => $option['destination'] . '/' . $name,
                         'type' => (isset($option['type']) ? $option['type'] : null) ];
