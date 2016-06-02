@@ -566,7 +566,9 @@ class BaseRepository implements BaseRepositoryInterface{
                     }
                     $file = [ 'name' => $name, 'caption' => $option['caption'],
                         'file' => $option['destination'] . '/' . $name,
-                        'type' => (isset($option['type']) ? $option['type'] : null) ];
+                        'type' => (isset($option['type']) ? $option['type'] : null),
+                        'ext' => $file->getClientOriginalExtension()];
+//                    dd($file);
                     return $file;
             } catch (Exception $e) {
 
