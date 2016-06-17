@@ -28,7 +28,39 @@ class BaseRepository implements BaseRepositoryInterface{
     ];
     protected $linked = [];
     protected $path = null;
+    /**
+      [
+            'type' => 'morph',
+            'typeModel' => 'CurrentModel',
+            'morphTo' => "GalleryModel",
+            'variable' =>  "file_upload_variable_name",
+            'image_type' => "image_type",
+            'multiple' => false
+        ],
+     */
     public $imageConfig = [];
+    public $imageSizes = [
+        [
+            'width' => 280,
+            'height' => 190,
+            'prefix' => "th"
+        ],
+        [
+            'width' => 320,
+            'height' => 280,
+            'prefix' => "sm"
+        ],
+        [
+            'width' => 480,
+            'height' => 320,
+            'prefix' => "md"
+        ],
+        [
+            'width' => 720,
+            'height' => null,
+            'prefix' => "lg"
+        ]
+    ];
 
     public function model($model)
     {
@@ -559,10 +591,14 @@ class BaseRepository implements BaseRepositoryInterface{
             try {
                     $file->move($this->path.DIRECTORY_SEPARATOR.$option['destination'], $name);
                     if( $file->getClientOriginalExtension() != "mp4"){
+
+                        foreach ($this->imageSizes as $size) {
                             Image::make($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.$name
-                        )->resize(480, 320, function($constraint){
-                            $constraint->aspectRatio();
-                        })->save($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.'th_'.$name);
+                            )->resize($size['width'], $size['height'], function($constraint){
+                                $constraint->aspectRatio();
+                            })->save($this->path.DIRECTORY_SEPARATOR.$option['destination'].DIRECTORY_SEPARATOR.$size['prefix'].DIRECTORY_SEPARATOR.$name);
+                        }
+
                     }
                     $file = [ 'name' => $name, 'caption' => $option['caption'],
                         'file' => $option['destination'] . '/' . $name,
