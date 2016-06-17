@@ -28,6 +28,9 @@ class BaseRepository implements BaseRepositoryInterface{
     ];
     protected $linked = [];
     protected $path = null;
+    protected $defaultFilterType = [
+        '*' => "="
+    ];
     /**
       [
             'type' => 'morph',
@@ -243,12 +246,38 @@ class BaseRepository implements BaseRepositoryInterface{
 
                         $this->currentQuery->whereHas($tempWithString, function($q)
                                 use ($tempKey, $tempValue){
-                            $q->where($tempKey, "LIKE", '%'.$tempValue.'%');
+
+                            $filterType = $this->defaultFilterType['*'];
+
+                            if(isset($this->defaultFilterType[$tempKey])){
+                                $filterType = $this->defaultFilterType[$tempKey];
+                            }
+
+                            if($filterType === 'LIKE')
+                            {
+                                $q->where($tempKey, "LIKE", '%'.$tempValue.'%');
+                            }else{
+                                $q->where($tempKey, $filterType, $tempValue);
+                            }
+
+
                         });
                     }else{
                         if(count($fieldDataArray) == 2)
                         {
-                            $this->where([$fieldDataArray[0], "LIKE", '%'.$fieldDataArray[1].'%']);
+                            $filterType = $this->defaultFilterType['*'];
+
+                            if(isset($this->defaultFilterType[$fieldDataArray[0]])){
+                                $filterType = $this->defaultFilterType[$fieldDataArray[0]];
+                            }
+
+                            if($filterType == 'LIKE')
+                            {
+                                $this->where([$fieldDataArray[0], $filterType, '%'.$fieldDataArray[1].'%']);
+                            }else{
+                                $this->where([$fieldDataArray[0], $filterType, $fieldDataArray[1]]);
+                            }
+
                         }
                     }
                 }
