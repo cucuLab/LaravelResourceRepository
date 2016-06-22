@@ -636,7 +636,7 @@ class BaseRepository implements BaseRepositoryInterface{
 //                    dd($file);
                     return $file;
             } catch (Exception $e) {
-
+                    dd($e);
                     return false;
             }
     }
