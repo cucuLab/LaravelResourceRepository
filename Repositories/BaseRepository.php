@@ -616,7 +616,11 @@ class BaseRepository implements BaseRepositoryInterface{
 
             $name = $option['name'] . '.' . $file->getClientOriginalExtension();
 
-            if (!$file->isValid()) return false;
+            if (!$file->isValid())
+            {
+                dd($name);
+                return false;
+            }
             try {
                     $file->move($this->path.DIRECTORY_SEPARATOR.$option['destination'], $name);
                     if( $file->getClientOriginalExtension() != "mp4"){
