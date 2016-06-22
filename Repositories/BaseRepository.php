@@ -618,7 +618,7 @@ class BaseRepository implements BaseRepositoryInterface{
 
             if (!$file->isValid())
             {
-                dd($name);
+                dd($file);
                 return false;
             }
             try {
